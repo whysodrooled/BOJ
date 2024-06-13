@@ -1,0 +1,13 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string input;
+
+int main()
+{
+    cin >> input;
+
+    
+    return 0;
+}
