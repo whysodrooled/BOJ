@@ -1,11 +1,14 @@
+// https://velog.io/@sw801733/C-%EB%B0%B1%EC%A4%80-2579%EB%B2%88-%EA%B3%84%EB%8B%A8-%EC%98%A4%EB%A5%B4%EA%B8%B0
+// bottom-up ???
+
 #include <bits/stdc++.h>
 
 using namespace std;
 
 int n;
 int stair[300];
-unsigned int score;
-bool doublestep;
+int indexx[300] = {0};
+int score = 0;
 
 int main()
 {
@@ -18,12 +21,16 @@ int main()
         cin >> stair[i];
     }
 
-    score = stair[n-1];
-    doublestep = false;
-    for(int i = n-1; i <= 0;)
+    indexx[0] = stair[0];
+    indexx[1] = stair[0] + stair[1];
+    indexx[2] = stair[2] + max(stair[0], stair[1]);
+
+    for(int i = 3; i < n; i++)
     {
-        if(stair[i-1] + stair[])
+        indexx[i] = stair[i] + max(stair[i - 1] + indexx[i - 3], indexx[i - 2]);
     }
-    
+
+    cout << indexx[n-1];
+
     return 0;
 }
