@@ -4,8 +4,23 @@ typedef long long ll;
 using namespace std;
 
 int N;
-int minn = 4;
-queue<pair<int, int>> q;
+int ans = 4;
+
+void recur(int num, int count)
+{
+    if(count >= ans)
+        return;
+
+    for (int i = 1; i * i <= num; i++)
+    {
+        if(i*i == num)
+        {
+            ans = min(ans, count);
+            return;
+        }
+        recur(num - (i * i), count + 1);
+    }
+}
 
 int main()
 {
@@ -14,32 +29,8 @@ int main()
     ios_base::sync_with_stdio(false);
 
     cin >> N;
-    q.push(make_pair(N, 0));
-
-    while (!q.empty())
-    {
-        auto info = q.front();
-        q.pop();
-
-        if(info.second >= minn)
-        {
-            continue;
-        }
-
-        if(info.first == 0)
-        {
-            minn = min(minn, info.second);
-            continue;
-        }
-
-        for (int i = floor(pow(info.first, 0.5)); i > 0; i--)
-        {
-            if(info.second + 1 < minn)
-                q.push(make_pair(info.first - (i * i), info.second + 1));
-        }
-    }
-
-    cout << minn;
+    recur(N, 1);
+    cout << ans;
 
     return 0;
 }
